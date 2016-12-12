@@ -14,7 +14,7 @@ CC 				= gcc
 
 RM 				= rm -f
 
-SRCS 			= exiasaver.c\
+SRCS 			= exiasaver.c
                   
 OBJ 			= $(SRCS:.c=.o)
 

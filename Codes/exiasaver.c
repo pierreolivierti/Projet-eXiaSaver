@@ -4,7 +4,6 @@ int 		getRandom() {
 	int		termsavernb;
 	srand(time(NULL));
 	termsavernb = 1 + rand() % 3;
-	printf("%d\n", termsavernb);
 	return termsavernb;
 }
 
@@ -25,14 +24,17 @@ void		loadTermSaver(int tsaver, char **env) {
 void		start(char *ts, char **env) {
 	pid_t	pid;
 	char	*args[] = {ts, NULL};
-
 	switch (pid = fork()) {
 		case -1:
 			perror("fork");
+			exit(1);
 			break;
 		case 0:
-			printf("%s\n", ts);
 			execve(args[0], args, env);
+			exit(0);
+			break;
+		default: 
+			wait(0);
 	}
 }
 
@@ -43,6 +45,7 @@ void		displayStats() {
 int			main(int argc, char const *argv[], char **env)
 {
 	int 	termsaver;
+
 	if (argc < 2) {
 		termsaver = getRandom();
 		loadTermSaver(termsaver, env);

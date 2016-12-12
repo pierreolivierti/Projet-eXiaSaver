@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <errno.h>
 #include <time.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #ifndef _EXIASAVER_H_H
 #define	_EXIASAVER_H_H

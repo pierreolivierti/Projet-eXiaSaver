@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <string.h>
 
-char	 	getTime() {
+int	 	main() {
     char 	*Time;
     int 	i;
     int		j;
     int		timelen;
-    char	ftime[9];
+    char	ftime[8];
     time_t 	mytime;
 
     i = 0;
@@ -17,10 +17,11 @@ char	 	getTime() {
     i = strlen(Time);
     timelen = i - 6;
     i = i - 14;
-    while (i < timelen) {
+    while (i != timelen) {
     	ftime[j] = Time[i];
 		i++;
 		j++;
     }
-    return ftime;
+    printf("%s\n", ftime);
+    return 0;
 }
