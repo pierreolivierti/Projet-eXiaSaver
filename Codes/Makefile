@@ -8,24 +8,26 @@
 ## Last update	Wed Dec	7 15:14:34 2016 
 ##
 
-NAME =		eXiaSaver
+NAME 			= eXiaSaver
 
-CC	 = 		gcc
+CC 				= gcc
 
-RM	 = 		rm -f
+RM 				= rm -f
 
-SRCS = 		*.c 
+SRCS 			= exiasaver.c\
+                  
+OBJ 			= $(SRCS:.c=.o)
 
-OBJ  = 		$(SRCS:.c=.o)
+all: $(NAME)
 
-all:(NAME)
-	$(CC) -o $(NAME) $(OBJ)
+$(NAME): $(OBJ)
+		$(CC) -o $(NAME) $(OBJ)
 
-clean: $(OBJ)
-	$(RM) $(OBJ)
+clean:
+		$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(NAME)
+		$(RM) $(NAME)
 
 re: fclean all
 
