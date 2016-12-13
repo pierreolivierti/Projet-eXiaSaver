@@ -14,7 +14,8 @@ CC 				= gcc
 
 RM 				= rm -f
 
-SRCS 			= exiasaver.c
+SRCS 			= exiasaver.c \
+					getTime.c
                   
 OBJ 			= $(SRCS:.c=.o)
 

@@ -10,17 +10,20 @@
 #ifndef _EXIASAVER_H_H
 #define	_EXIASAVER_H_H
 
-typedef struct s_stats {
-	int		ts_type;
-	int		nbtotal;
+struct 		s_stats {
+	char	*date;
+	int		type;
 	char	*filename;
-	int		sizeClock;
-	int		initPlane;
-}			t_stats;
+	char	*size;
+	char	*pos;
+};
+
+typedef struct s_stats T_STAT;
 
 int			getRandom();
 void		loadTermSaver(int tsaver, char **env);
-void		start(char *ts, char **env);
+int			start(char *ts, char **env);
 void		displayStats();
+int			getTime();
 
 #endif

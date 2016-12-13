@@ -1,27 +1,17 @@
-#include <time.h>
-#include <stdio.h>
-#include <string.h>
+#include "include/eXiaSaver.h"
 
-int	 	main() {
-    char 	*Time;
-    int 	i;
-    int		j;
-    int		timelen;
-    char	ftime[8];
-    time_t 	mytime;
+int	 		getTime() {
+	T_STAT	myStats;
+    time_t 	now;
+    struct tm* now_tm;
+    char 	date[80];
+    char 	*t;
 
-    i = 0;
-    j = 0;
-    mytime = time(NULL);
-    Time = ctime(&mytime);
-    i = strlen(Time);
-    timelen = i - 6;
-    i = i - 14;
-    while (i != timelen) {
-    	ftime[j] = Time[i];
-		i++;
-		j++;
-    }
-    printf("%s\n", ftime);
+    time(&now);
+    now_tm = localtime(&now);
+    strftime (date, 80, "%d/%m/%Y %H:%M:%S", now_tm);
+    printf("%s\n", date);
+    myStats.date = date;
+    printf("%s\n", myStats.date);
     return 0;
 }

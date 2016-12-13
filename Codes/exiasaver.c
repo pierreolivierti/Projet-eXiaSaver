@@ -9,6 +9,8 @@ int 		getRandom() {
 
 void		loadTermSaver(int tsaver, char **env) {
 	char 	*termsaver;
+	T_STAT myStats;
+
 	if (tsaver == 1) {
 		termsaver = "static";
 	}
@@ -18,12 +20,19 @@ void		loadTermSaver(int tsaver, char **env) {
 	else if (tsaver == 3) {
 		termsaver = "interactive";
 	}
+	getTime();
+	myStats.type = tsaver;
+	printf("%s\n", myStats.date);
+	printf("myStats.type = %d\n", myStats.type);
 	start(termsaver, env);
 }
 
-void		start(char *ts, char **env) {
+int		start(char *ts, char **env) {
 	pid_t	pid;
 	char	*args[] = {ts, NULL};
+	T_STAT	myStats;
+	printf("myStats.type = %d\n", myStats.type);
+
 	switch (pid = fork()) {
 		case -1:
 			perror("fork");
@@ -36,6 +45,7 @@ void		start(char *ts, char **env) {
 		default: 
 			wait(0);
 	}
+	return 0;
 }
 
 void		displayStats() {
