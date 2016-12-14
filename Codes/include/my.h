@@ -12,12 +12,11 @@
 
 #include "struct.h"
 
-
-
 int			getRandom();
-void		loadTermSaver(struct s_stats *myStats, char **env);
-int			start(struct s_stats *myStats, char **env);
+void		loadTermSaver(struct s_stats *myStats);
+int			start(struct s_stats *myStats);
 void		displayStats();
-int			getTime(struct s_stats *myStats);
+char		*getTime();
+void		saveStats(struct s_stats *myStats);
 
 #endif

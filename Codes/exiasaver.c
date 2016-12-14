@@ -7,7 +7,8 @@ int 		getRandom(struct s_stats *myStats) {
 	return 0;
 }
 
-void		loadTermSaver(struct s_stats *myStats, char **env) {
+void		loadTermSaver(struct s_stats *myStats) {
+	char	*date;
 	if (myStats->type == 1) {
 		myStats->type_name = "static";
 	}
@@ -17,29 +18,25 @@ void		loadTermSaver(struct s_stats *myStats, char **env) {
 	else if (myStats->type == 3) {
 		myStats->type_name = "interactive";
 	}
-	getTime(myStats);
-	printf("%s\n", myStats->date);
-	printf("myStats.type = %d\n", myStats->type);
-	start(myStats, env);
+	date = getTime();
+	myStats->date = date;
+	start(myStats);
 }
 
-int		start(struct s_stats *myStats, char **env) {
+int		start(struct s_stats *myStats) {
 	pid_t	pid;
 	char	*args[] = {myStats->type_name, NULL};
 	printf("myStats.type = %d\n", myStats->type);
 	printf("myStats.name = %s\n", myStats->type_name);
+	pid = fork();
 
-	switch (pid = fork()) {
-		case -1:
-			perror("fork");
-			exit(1);
-			break;
-		case 0:
-			execve(args[0], args, env);
-			exit(0);
-			break;
-		default: 
-			wait(0);
+	if (pid == -1) {
+		perror("fork");
+	} else if (pid == 0) {
+		execv(args[0], args);
+		exit(0);
+	} else if (pid > 0) {
+		wait(&pid);
 	}
 	return 0;
 }
@@ -48,13 +45,46 @@ void		displayStats() {
 
 }
 
+void		saveStats(struct s_stats *myStats) {
+	FILE 	*stats;
+	char	*buffer;
+	char	*init;
+	char 	*msg_tpye1;
+	char	*msg_type2;
+	char	*msg_type3;
+
+	init = "HEYY";
+	buffer = malloc(sizeof(char) * 255);
+	stats = fopen("./statistiques.txt", "a");
+	if (stats == NULL) {
+		printf("Error, cannot open file\n");
+	} 
+	else {
+		if (fgets(buffer, sizeof buffer, stats) == NULL) {
+			fprintf(stats, "%s\n", init);
+		} else {
+			if (myStats->type == 1) {
+				fprintf(stats, "%s%c%s%c%s\n", myStats->date, 59, myStats->type, 59, myStats->filename);
+				printf("%s%c%s%c%s\n", myStats->date, 59, myStats->type, 59, myStats->filename);
+			} else if (myStats->type == 2) {
+				fprintf(stats, "%s\n", msg_type2);
+				printf("%s%c%s%c%s\n", myStats->date, 59, myStats->type, 59, myStats->filename);
+			} else if (myStats->type == 3) {
+				fprintf(stats, "%s\n", msg_type3);
+				printf("%s%c%s%c%s\n", myStats->date, 59, myStats->type, 59, myStats->filename);
+			}
+		}
+	}
+}
+
 int			main(int argc, char const *argv[], char **env)
 {
 	int 	termsaver;
 	struct s_stats	myStats;
 	if (argc < 2) {
 		getRandom(&myStats);
-		loadTermSaver(&myStats,env);
+		loadTermSaver(&myStats);
+		saveStats(&myStats);
 	} else if (strncmp(argv[1], "-stats", 6) == 0) {
 		displayStats();
 	} else {

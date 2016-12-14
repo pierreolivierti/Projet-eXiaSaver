@@ -1,13 +1,13 @@
 #include "include/my.h"
 
-int	 		getTime(struct s_stats *myStats) {
+char	 	*getTime() {
     time_t 	now;
-    struct tm* now_tm;
+    struct  tm* now_tm;
     char 	*t;
+    static char date[22];
 
     time(&now);
     now_tm = localtime(&now);
-    strftime (myStats->date, 80, "%d/%m/%Y %H:%M:%S", now_tm);
-
-    return 0;
+    strftime (date, 80, "%d/%m/%Y %H:%M:%S", now_tm);
+    return date;
 }
