@@ -15,7 +15,7 @@
 int			getRandom();
 void		loadTermSaver(struct s_stats *myStats);
 int			start(struct s_stats *myStats);
-void		displayStats();
+int			displayStats();
 char		*getTime();
 void		saveStats(struct s_stats *myStats);
 

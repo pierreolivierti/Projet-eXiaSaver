@@ -5,7 +5,7 @@ struct 		s_stats {
 	char	*date;
 	char	*type_name;
 	int		type;
-	char	*filename;
+	char	*img_name;
 	char	*size;
 	char	*pos;
 } t_stats;
