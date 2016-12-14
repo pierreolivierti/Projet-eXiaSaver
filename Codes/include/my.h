@@ -18,5 +18,6 @@ int			start(struct s_stats *myStats);
 int			displayStats();
 char		*getTime();
 void		saveStats(struct s_stats *myStats);
+char 		*getRandomImage();
 
 #endif

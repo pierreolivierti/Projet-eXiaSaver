@@ -7,11 +7,35 @@ int 			getRandom(struct s_stats *myStats) {
 	return 0;
 }
 
+char 			*getRandomImage() {
+	int 		image;
+	static char name[11];
+
+	srand(time(NULL));
+	image = 1 + rand() % 5;
+	if (image == 1) {
+		strcpy(name, "dessin1.pbm");
+	} else if (image == 2) {
+		strcpy(name, "dessin2.pbm");
+	} else if (image == 3) {
+		strcpy(name, "dessin3.pbm");
+	} else if (image == 4) {
+		strcpy(name, "dessin4.pbm");
+	} else if (image == 5) {
+		strcpy(name, "dessin5.pbm");
+	}
+	return name;
+}
+
 void			loadTermSaver(struct s_stats *myStats) {
 	char		*date;
+	char 		*imgname;
 
+	system("clear");
 	if (myStats->type == 1) {
 		myStats->type_name = "static";
+		imgname = getRandomImage();
+		myStats->img_name = imgname;
 	}
 	else if (myStats->type == 2) {
 		myStats->type_name = "dynamic";
@@ -27,10 +51,8 @@ void			loadTermSaver(struct s_stats *myStats) {
 
 int				start(struct s_stats *myStats) {
 	pid_t		pid;
-	char		*args[] = {myStats->type_name, NULL};
+	char		*args[] = {myStats->type_name, myStats->img_name, NULL};
 
-	printf("myStats.type = %d\n", myStats->type);
-	printf("myStats.name = %s\n", myStats->type_name);
 	pid = fork();
 	if (pid == -1) {
 		perror("fork");
@@ -45,7 +67,7 @@ int				start(struct s_stats *myStats) {
 
 int			displayStats() {
 	pid_t 		pid;
-	char		*args[] = {"cat", "/home/mrflyinrocket/Desktop/Projet-eXiaSaver/Codes/statistiques.txt", NULL};
+	char		*args[] = {"cat", "/home/mrflyinrocket/Desktop/Projet-eXiaSaver/Codes/historique.txt", NULL};
 
 	pid = fork();
 	if (pid == -1) {
@@ -99,13 +121,26 @@ int				main(int argc, char const *argv[], char **env)
 {
 	int 		termsaver;
 	struct s_stats	myStats;
-	if (argc < 2) {
-		getRandom(&myStats);
+
+	if (argc < 3 && strlen(argv[1]) < 2 && atoi(argv[1]) < 5 && atoi(argv[1]) > 0) {
+		printf("%d\n", atoi(argv[1]));
+		if(atoi(argv[1]) == 1)
+			myStats.type = 1;
+		else if (atoi(argv[1]) == 2)
+			myStats.type = 2;
+		else if (atoi(argv[1]) == 3)
+			myStats.type = 3;
+		else if (atoi(argv[1]) == 4)
+			getRandom(&myStats);
 		loadTermSaver(&myStats);
 	} else if (strncmp(argv[1], "-stats", 6) == 0) {
 		displayStats();
 	} else {
-		printf("Usage : ./eXiaSaver [-stats]\n");
+		printf("Usage : ./eXiaSaver [-stats] : Get some stats\n");
+		printf("\t\t\t1	: Static mode\n");
+		printf("\t\t\t2	: Dynamic mode\n");
+		printf("\t\t\t3	: Interactive mode\n");
+		printf("\t\t\t4	: Random mode\n");
 	}
 	return 0;
 }
