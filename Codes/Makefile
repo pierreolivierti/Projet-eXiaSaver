@@ -14,8 +14,6 @@ N_S				= static
 
 N_D				= dynamic
 
-N_I				= interactive
-
 CC 				= gcc
 
 RM 				= rm -f
@@ -25,9 +23,8 @@ SRCS 			= exiasaver.c \
                   
 STAT 			= static.c
 
-DYNA 			= dynamic.c
-
-INTER			= interactive.c
+DYNA 			= dynamic.c \
+					displayTime.c
 
 OBJ 			= $(SRCS:.c=.o)
 
@@ -35,9 +32,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 		$(CC) -o $(NAME) $(OBJ)
-		$(CC) -o $(N_S) static.c
-		$(CC) -o $(N_D) dynamic.c
-		$(CC) -o $(N_I) interactive.c
+		$(CC) -o $(N_S) $(STAT)
+		$(CC) -o $(N_D) $(DYNA)
 		$(RM) $(OBJ)
 
 clean:

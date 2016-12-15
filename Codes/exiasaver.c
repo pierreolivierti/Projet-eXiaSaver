@@ -9,12 +9,12 @@ int 			getRandom(struct s_stats *myStats) {
 
 char 			*getRandomImage() {
 	int 		image;
-	static char name[11];
+	static char name[50];
 
 	srand(time(NULL));
-	image = 1 + rand() % 5;
+	image = 1;//1 + rand() % 5;
 	if (image == 1) {
-		strcpy(name, "dessin1.pbm");
+		strcpy(name, "Dessin/DESSIN.pbm");
 	} else if (image == 2) {
 		strcpy(name, "dessin2.pbm");
 	} else if (image == 3) {
@@ -43,6 +43,7 @@ void			loadTermSaver(struct s_stats *myStats) {
 	else if (myStats->type == 3) {
 		myStats->type_name = "interactive";
 	}
+	printf("%s\n", myStats->img_name);
 	date = getTime();
 	myStats->date = date;
 	start(myStats);
@@ -67,7 +68,7 @@ int				start(struct s_stats *myStats) {
 
 int			displayStats() {
 	pid_t 		pid;
-	printf("%s\n", getenv("EXIASAVER_HOME"));
+	//printf("%s\n", getenv("EXIASAVER_HOME"));
 	/*home = strcat(home, "historique.txt");
 	printf("%s\n", home);*/
 	char		*args[] = {"cat", "/home/mrflyinrocket/Desktop/Projet-eXiaSaver/Codes/historique.txt", NULL};
@@ -110,7 +111,7 @@ void			saveStats(struct s_stats *myStats) {
 		}
 		i = i - 5;
 		if (myStats->type == 1) {
-			fprintf(stats, "%d : %s;%d\n", i, myStats->date, myStats->type/*, myStats->img_name*/);
+			fprintf(stats, "%d : %s;%d;%s\n", i, myStats->date, myStats->type, myStats->img_name);
 		} else if (myStats->type == 2) {
 			fprintf(stats, "%d : %s;%d\n", i, myStats->date, myStats->type/*, myStats->size*/);
 		} else if (myStats->type == 3) {
