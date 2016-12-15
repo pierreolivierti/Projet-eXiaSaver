@@ -67,6 +67,9 @@ int				start(struct s_stats *myStats) {
 
 int			displayStats() {
 	pid_t 		pid;
+	printf("%s\n", getenv("EXIASAVER_HOME"));
+	/*home = strcat(home, "historique.txt");
+	printf("%s\n", home);*/
 	char		*args[] = {"cat", "/home/mrflyinrocket/Desktop/Projet-eXiaSaver/Codes/historique.txt", NULL};
 
 	pid = fork();
@@ -92,7 +95,7 @@ void			saveStats(struct s_stats *myStats) {
 			\n#Niveau : 1=statique, 2=dynamique, 3=interactif;\
 			\n#Si 1, nom fichier ; Si 2, taille d’affichage ; Si 3, position initiale avion sur la console\n";
 	buffer = malloc(sizeof(char) * 255);
-	stats = fopen("./statistiques.txt", "a+");
+	stats = fopen("./historique.txt", "a+");
 	i = 1;
 	if (stats == NULL) {
 		printf("Error, cannot open file\n");
@@ -117,13 +120,15 @@ void			saveStats(struct s_stats *myStats) {
 	}
 }
 
-int				main(int argc, char const *argv[], char **env)
-{
+int				main(int argc, char const *argv[], char **env) {
 	int 		termsaver;
 	struct s_stats	myStats;
 
-	if (argc < 3 && strlen(argv[1]) < 2 && atoi(argv[1]) < 5 && atoi(argv[1]) > 0) {
-		printf("%d\n", atoi(argv[1]));
+	if (argv[1] == NULL) {
+			goto usage;
+	}
+
+	if (atoi(argv[1]) > 0 && atoi(argv[1]) < 5 && strlen(argv[1]) < 2) {
 		if(atoi(argv[1]) == 1)
 			myStats.type = 1;
 		else if (atoi(argv[1]) == 2)
@@ -136,7 +141,8 @@ int				main(int argc, char const *argv[], char **env)
 	} else if (strncmp(argv[1], "-stats", 6) == 0) {
 		displayStats();
 	} else {
-		printf("Usage : ./eXiaSaver [-stats] : Get some stats\n");
+		usage:
+		printf("Usage : ./eXiaSaver [-stats]\t: Get some stats\n");
 		printf("\t\t\t1	: Static mode\n");
 		printf("\t\t\t2	: Dynamic mode\n");
 		printf("\t\t\t3	: Interactive mode\n");
