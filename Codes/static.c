@@ -9,8 +9,8 @@
 int main(int argc, char *argv[])
 {
     FILE* fichier = NULL;
-    char  *filename;
-    filename = argv[1];
+    char* filename;
+    filename=argv[1];
 
     typedef struct size size;
     struct    size
