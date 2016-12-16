@@ -12,18 +12,18 @@ char 			*getRandomImage() {
 	static char name[50];
 
 	srand(time(NULL));
-	image = 1;//1 + rand() % 5;
+	image = 1 + rand() % 3;
 	if (image == 1) {
 		strcpy(name, "Dessin/DESSIN.pbm");
 	} else if (image == 2) {
-		strcpy(name, "dessin2.pbm");
+		strcpy(name, "image1.pbm");
 	} else if (image == 3) {
-		strcpy(name, "dessin3.pbm");
-	} else if (image == 4) {
+		strcpy(name, "image2.pbm");
+	}/* else if (image == 4) {
 		strcpy(name, "dessin4.pbm");
 	} else if (image == 5) {
 		strcpy(name, "dessin5.pbm");
-	}
+	}*/
 	return name;
 }
 
@@ -52,7 +52,7 @@ void			loadTermSaver(struct s_stats *myStats) {
 
 int				start(struct s_stats *myStats) {
 	pid_t		pid;
-	char		*args[] = {myStats->type_name, myStats->img_name, NULL};
+	char		*args[20] = {myStats->type_name, myStats->img_name, NULL};
 
 	pid = fork();
 	if (pid == -1) {
@@ -68,9 +68,6 @@ int				start(struct s_stats *myStats) {
 
 int			displayStats() {
 	pid_t 		pid;
-	//printf("%s\n", getenv("EXIASAVER_HOME"));
-	/*home = strcat(home, "historique.txt");
-	printf("%s\n", home);*/
 	char		*args[] = {"cat", "/home/mrflyinrocket/Desktop/Projet-eXiaSaver/Codes/historique.txt", NULL};
 
 	pid = fork();
