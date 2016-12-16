@@ -42,3 +42,8 @@
 16/12/2016 15:17:13;1;Dessins/image4.pbm
 16/12/2016 15:17:15;2
 16/12/2016 15:29:20;2
+16/12/2016 15:33:24;1;Dessins/image4.pbm
+16/12/2016 15:44:07;1;Dessins/image3.pbm
+16/12/2016 15:44:11;1;Dessins/image4.pbm
+16/12/2016 15:56:19;1;Dessins/image2.pbm
+16/12/2016 15:56:57;1;Dessins/image4.pbm

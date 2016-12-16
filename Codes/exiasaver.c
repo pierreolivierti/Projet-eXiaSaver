@@ -14,6 +14,7 @@ char 			*getRandomImage() {
 	static char name[50];
 	srand(time(NULL));
 	image = 1 + rand() % 5;
+	printf("%s", getenv("EXIASAVER_HOME"));
 	pDir = opendir("Dessins/");
 	while ((pDirent = readdir(pDir)) != NULL) {
 		printf("%s\n", pDirent->d_name);
