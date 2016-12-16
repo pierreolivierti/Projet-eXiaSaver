@@ -12,18 +12,18 @@ char 			*getRandomImage() {
 	static char name[50];
 
 	srand(time(NULL));
-	image = 1 + rand() % 3;
+	image = 1 + rand() % 5;
 	if (image == 1) {
 		strcpy(name, "Dessin/DESSIN.pbm");
 	} else if (image == 2) {
 		strcpy(name, "Dessin/image1.pbm");
 	} else if (image == 3) {
 		strcpy(name, "Dessin/image2.pbm");
-	}/* else if (image == 4) {
-		strcpy(name, "dessin4.pbm");
+	} else if (image == 4) {
+		strcpy(name, "Dessin/image3.pbm");
 	} else if (image == 5) {
-		strcpy(name, "dessin5.pbm");
-	}*/
+		strcpy(name, "Dessin/image4.pbm");
+	}
 	return name;
 }
 
