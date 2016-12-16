@@ -16,9 +16,9 @@ char 			*getRandomImage() {
 	if (image == 1) {
 		strcpy(name, "Dessin/DESSIN.pbm");
 	} else if (image == 2) {
-		strcpy(name, "image1.pbm");
+		strcpy(name, "Dessin/image1.pbm");
 	} else if (image == 3) {
-		strcpy(name, "image2.pbm");
+		strcpy(name, "Dessin/image2.pbm");
 	}/* else if (image == 4) {
 		strcpy(name, "dessin4.pbm");
 	} else if (image == 5) {
