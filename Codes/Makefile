@@ -19,9 +19,10 @@ CC 				= gcc
 RM 				= rm -f
 
 SRCS 			= exiasaver.c \
-					getTime.c
+					getTime.c \
+					stats.c
                   
-STAT 			= static.c
+STATI 			= static.c
 
 DYNA 			= dynamic.c \
 					displayTime.c
@@ -32,7 +33,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 		$(CC) -o $(NAME) $(OBJ)
-		$(CC) -o $(N_S) $(STAT)
+		$(CC) -o $(N_S) $(STATI)
 		$(CC) -o $(N_D) $(DYNA)
 		$(RM) $(OBJ)
 

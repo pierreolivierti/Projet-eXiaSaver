@@ -54,7 +54,8 @@ int initTime()
 		FILE* fichier3=getFichier(TimeM2);
 		FILE* fichier4=getFichier(TimeS1);
 		FILE* fichier5=getFichier(TimeS2);
-		FILE* fichierX=fopen("Dessin/2points.pbm", "r");
+		FILE* fichierX=fopen("Chiffres/2points.pbm", "r");
+
 
 		displayTime(fichier0, fichier1, fichier2, fichier3, fichier4, fichier5, fichierX, sizeX, sizeY, size); //affichage de l'jeure
 	// Affichage HH:MM:SS  avec ("printf("%u%u : %u%u : %u%u\n",TimeH1 ,TimeH2,TimeM1 ,TimeM2,TimeS1 ,TimeS2);

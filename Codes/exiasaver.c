@@ -9,20 +9,25 @@ int 			getRandom(struct s_stats *myStats) {
 
 char 			*getRandomImage() {
 	int 		image;
+	struct dirent *pDirent;
+	DIR 		*pDir;
 	static char name[50];
-
 	srand(time(NULL));
 	image = 1 + rand() % 5;
+	pDir = opendir("Dessins/");
+	while ((pDirent = readdir(pDir)) != NULL) {
+		printf("%s\n", pDirent->d_name);
+	}	
 	if (image == 1) {
-		strcpy(name, "Dessin/DESSIN.pbm");
+		strcpy(name, "Dessins/DESSIN.pbm");
 	} else if (image == 2) {
-		strcpy(name, "Dessin/image1.pbm");
+		strcpy(name, "Dessins/image1.pbm");
 	} else if (image == 3) {
-		strcpy(name, "Dessin/image2.pbm");
+		strcpy(name, "Dessins/image2.pbm");
 	} else if (image == 4) {
-		strcpy(name, "Dessin/image3.pbm");
+		strcpy(name, "Dessins/image3.pbm");
 	} else if (image == 5) {
-		strcpy(name, "Dessin/image4.pbm");
+		strcpy(name, "Dessins/image4.pbm");
 	}
 	return name;
 }
@@ -43,7 +48,6 @@ void			loadTermSaver(struct s_stats *myStats) {
 	else if (myStats->type == 3) {
 		myStats->type_name = "interactive";
 	}
-	printf("%s\n", myStats->img_name);
 	date = getTime();
 	myStats->date = date;
 	start(myStats);
@@ -59,22 +63,6 @@ int				start(struct s_stats *myStats) {
 		perror("fork");
 	} else if (pid == 0) {
 		execv(args[0], args);
-		exit(0);
-	} else if (pid > 0) {
-		wait(&pid);
-	}
-	return 0;
-}
-
-int			displayStats() {
-	pid_t 		pid;
-	char		*args[] = {"cat", "/home/mrflyinrocket/Desktop/Projet-eXiaSaver/Codes/historique.txt", NULL};
-
-	pid = fork();
-	if (pid == -1) {
-		perror("fork");
-	} else if (pid == 0){
-		execv("/bin/cat", args);
 		exit(0);
 	} else if (pid > 0) {
 		wait(&pid);
@@ -108,11 +96,11 @@ void			saveStats(struct s_stats *myStats) {
 		}
 		i = i - 5;
 		if (myStats->type == 1) {
-			fprintf(stats, "%d : %s;%d;%s\n", i, myStats->date, myStats->type, myStats->img_name);
+			fprintf(stats, "%s;%d;%s\n", myStats->date, myStats->type, myStats->img_name);
 		} else if (myStats->type == 2) {
-			fprintf(stats, "%d : %s;%d\n", i, myStats->date, myStats->type/*, myStats->size*/);
+			fprintf(stats, "%s;%d\n", myStats->date, myStats->type/*, myStats->size*/);
 		} else if (myStats->type == 3) {
-			fprintf(stats, "%d : %s;%d\n", i, myStats->date, myStats->type/*, myStats->pos*/);
+			fprintf(stats, "%s;%d\n", myStats->date, myStats->type/*, myStats->pos*/);
 		}
 		fclose(stats);
 	}

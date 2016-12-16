@@ -32,6 +32,7 @@ int main(int argc, char *argv[])
     int retour;
     int espacement;
     fichier = fopen(filename, "r");
+    //Ouverture d fichier
 
     if (fichier != NULL) 
     {   
@@ -41,27 +42,20 @@ int main(int argc, char *argv[])
           fgets(chaine, TAILLE_MAX, fichier);
           if (j==1)
           { 
-            printf("%s\n",chaine);
             dimensions=strtok(chaine," ");
             a=(dimensions[0]-48)*10+(dimensions[1]-48);
             b=(dimensions[3]-48)*10+(dimensions[4]-48);
-            printf("%d\n",a );
-            printf("%d\n",b );
           }
-          
           while(j>1&&x<a)
           { 
             if (chaine[y]==48)
             { 
               tab[j][x]=chaine[y];
-              
               x++;
             }
-
             else if (chaine[y]==49)
             {
               tab[j][x]=chaine[y];
-              
               x++;
             }
               y++;
@@ -69,23 +63,14 @@ int main(int argc, char *argv[])
           j++;          
         }                     
       fclose(fichier);
-
     }
     struct  size  termsize;
     struct winsize  w;
     ioctl(0, TIOCGWINSZ, &w);
     termsize.row = w.ws_row;
-    termsize.col = w.ws_col;
-    printf("%d\n", termsize.col);
-    printf("%d\n", termsize.row);
-    
-    
+    termsize.col = w.ws_col;    
     retour=(termsize.row-b)/2;
     espacement=(termsize.col-a)/2;
-
-    printf("%d\n", retour);
-    printf("%d\n", espacement);
-
     for(i=0;i<=retour;i=i+1)
     {
       printf ("\n");
@@ -98,8 +83,7 @@ int main(int argc, char *argv[])
         printf (" ");
       }
       while (x<a)
-      {       
-                
+      {            
         if (tab[y][x]=='1')
         {
           printf ("#");

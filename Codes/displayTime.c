@@ -1,46 +1,45 @@
 #include "include/my.h"
 
 FILE* getFichier(int valeur){
-	
 	switch(valeur){
 		case 0:
-			return fopen("Dessin/chiffre0.pbm","r");
+			return fopen("Chiffres/chiffre0.pbm","r");
 			break;
 
 		case 1:
-			return fopen("Dessin/chiffre1.pbm","r");
+			return fopen("Chiffres/chiffre1.pbm","r");
 			break;
 
 		case 2:
-			return fopen("Dessin/chiffre2.pbm","r");
+			return fopen("Chiffres/chiffre2.pbm","r");
 			break;
 
 		case 3:
-			return fopen("Dessin/chiffre3.pbm","r");
+			return fopen("Chiffres/chiffre3.pbm","r");
 			break;
 
 		case 4:
-			return fopen("Dessin/chiffre4.pbm","r");
+			return fopen("Chiffres/chiffre4.pbm","r");
 			break;
 
 		case 5:
-			return fopen("Dessin/chiffre5.pbm","r");
+			return fopen("Chiffres/chiffre5.pbm","r");
 			break;
 
 		case 6:
-			return fopen("Dessin/chiffre6.pbm","r");
+			return fopen("Chiffres/chiffre6.pbm","r");
 			break;
 
 		case 7:
-			return fopen("Dessin/chiffre7.pbm","r");
+			return fopen("Chiffres/chiffre7.pbm","r");
 			break;
 
 		case 8:
-			return fopen("Dessin/chiffre8.pbm","r");
+			return fopen("Chiffres/chiffre8.pbm","r");
 			break;
 
 		case 9:
-			return fopen("Dessin/chiffre9.pbm","r");
+			return fopen("Chiffres/chiffre9.pbm","r");
 			break;
 	}
 }
